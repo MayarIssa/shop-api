@@ -1,0 +1,38 @@
+### Try the API from VS Code (REST Client) or Visual Studio.
+@host = http://localhost:5210
+
+### Register a customer
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{ "email": "mayar@example.com", "fullName": "Mayar", "password": "Password123" }
+
+### Log in (copy the token into @token below)
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "mayar@example.com", "password": "Password123" }
+
+###
+@token = paste-token-here
+
+### Browse products
+GET {{host}}/api/products?search=book&sortBy=price&page=1&pageSize=10
+
+### Add to cart
+POST {{host}}/api/cart/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "productId": 1, "quantity": 2 }
+
+### Checkout
+POST {{host}}/api/orders/checkout
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "shippingAddress": "12 Fouad St, Alexandria, Egypt" }
+
+### My orders
+GET {{host}}/api/orders
+Authorization: Bearer {{token}}
